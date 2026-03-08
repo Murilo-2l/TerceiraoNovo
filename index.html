@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Último Capítulo | Terceirão</title>
+    <title>O Último Capítulo | Terceirão 302 Homago</title>
     <style>
         :root {
             --bg-color: #0f0f11;
             --text-color: #f0f0f0;
-            --accent-color: #d4af37; /* Dourado para dar o peso de formatura */
+            --accent-color: #d4af37;
             --card-bg: #1a1a1d;
         }
 
@@ -41,11 +41,16 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Título alterado conforme seu pedido */
         nav h1 {
-            font-size: 1.5rem;
-            color: var(--accent-color);
+            font-size: 1.2rem;
+            color: var(--text-color);
             letter-spacing: 2px;
             text-transform: uppercase;
+        }
+
+        nav h1 span {
+            color: var(--accent-color);
         }
 
         nav ul {
@@ -67,7 +72,7 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section (O Peso do Último Ano) */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -84,7 +89,6 @@
             font-size: 4rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            animation: fadeInDown 1.5s ease;
         }
 
         .hero p {
@@ -92,7 +96,6 @@
             max-width: 600px;
             color: #ccc;
             margin-bottom: 30px;
-            animation: fadeInUp 1.5s ease;
         }
 
         .hero span {
@@ -100,7 +103,7 @@
             font-weight: bold;
         }
 
-        /* Linha do Tempo (Nossa História) */
+        /* História */
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -156,7 +159,7 @@
             font-size: 1.5rem;
         }
 
-        /* Galeria de Fotos (Polaroids) */
+        /* Galeria */
         .galeria {
             padding: 100px 50px;
             background-color: #111113;
@@ -164,7 +167,7 @@
 
         .grid-fotos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -188,6 +191,7 @@
             z-index: 10;
         }
 
+        /* Estilo da foto real */
         .polaroid img {
             width: 100%;
             height: 250px;
@@ -206,6 +210,21 @@
             margin-top: 15px;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Estilo para os espaços em branco (Placeholders) */
+        .foto-vazia {
+            width: 100%;
+            height: 250px;
+            background-color: #e0e0e0;
+            border: 2px dashed #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-size: 3rem;
+            font-weight: bold;
         }
 
         /* Footer */
@@ -217,31 +236,21 @@
         }
 
         footer p {
-            color: #777;
-        }
-
-        /* Animações */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            color: #a0a0a0;
         }
 
         @media (max-width: 768px) {
             nav ul { display: none; }
             .hero h2 { font-size: 2.5rem; }
             .historia, .galeria { padding: 50px 20px; }
+            nav { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <h1>Terceirão <span>'26</span></h1>
+    <nav aria-label="Navegação principal">
+        <h1>terceirao 302 <span>homago</span></h1>
         <ul>
             <li><a href="#inicio">Início</a></li>
             <li><a href="#historia">A Jornada</a></li>
@@ -275,22 +284,27 @@
     <section id="galeria" class="galeria">
         <h2 class="section-title">Mural de Memórias</h2>
         <div class="grid-fotos">
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069" alt="Galera no intervalo">
-                <p>Aquela resenha no pátio</p>
+            
+            <div class="polaroid" tabindex="0">
+                <img src="img/turma.jpg" alt="Turma reunida no pátio da escola">
+                <p>tem gente que esquece o que é ter dezesseis anos</p>
             </div>
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070" alt="Festa">
-                <p>Interclasses '26</p>
+
+            <div class="polaroid" tabindex="0">
+                <div class="foto-vazia">+</div>
+                <p>Espaço reservado</p>
             </div>
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071" alt="Estudos">
-                <p>Desespero pré-prova</p>
+
+            <div class="polaroid" tabindex="0">
+                <div class="foto-vazia">+</div>
+                <p>Espaço reservado</p>
             </div>
-            <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1627556592933-ffe99c1c9cd8?q=80&w=2070" alt="Formatura">
-                <p>Para sempre Terceirão</p>
+
+            <div class="polaroid" tabindex="0">
+                <div class="foto-vazia">+</div>
+                <p>Espaço reservado</p>
             </div>
+
         </div>
     </section>
 
