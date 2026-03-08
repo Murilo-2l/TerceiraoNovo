@@ -24,9 +24,10 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navegação */
+        /* --- NAVEGAÇÃO E MENU HAMBÚRGUER --- */
         nav {
             position: fixed;
             top: 0;
@@ -41,7 +42,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Título alterado conforme seu pedido */
         nav h1 {
             font-size: 1.2rem;
             color: var(--text-color);
@@ -53,26 +53,75 @@
             color: var(--accent-color);
         }
 
-        nav ul {
+        /* O Botão de 3 pontinhos/linhas */
+        .menu-toggle {
             display: flex;
-            list-style: none;
-            gap: 30px;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001; /* Fica acima do menu aberto */
         }
 
-        nav a {
+        .menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* A Caixa do Menu Oculto */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Escondido fora da tela */
+            width: 300px;
+            height: 100vh;
+            background: rgba(20, 20, 22, 0.98);
+            border-left: 1px solid var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 40px 40px 40px;
+            gap: 25px;
+            transition: right 0.4s ease-in-out;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            list-style: none;
+        }
+
+        /* Classe que o JavaScript vai adicionar para mostrar o menu */
+        .nav-menu.active {
+            right: 0; 
+        }
+
+        .nav-menu a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: color 0.3s, padding-left 0.3s;
+            display: block;
         }
 
-        nav a:hover {
+        .nav-menu a:hover {
             color: var(--accent-color);
+            padding-left: 10px; /* Efeito legal ao passar o mouse */
         }
 
-        /* Hero Section */
+        .categoria-futura {
+            color: #555 !important;
+            font-size: 0.9rem !important;
+            pointer-events: none; /* Desativa o clique por enquanto */
+        }
+
+        .menu-divisor {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+        }
+
+        /* --- RESTO DO SITE (Sem alterações) --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -85,162 +134,33 @@
             padding: 0 20px;
         }
 
-        .hero h2 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
+        .hero h2 { font-size: 4rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; max-width: 600px; color: #ccc; margin-bottom: 30px; }
+        .hero span { color: var(--accent-color); font-weight: bold; }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: #ccc;
-            margin-bottom: 30px;
-        }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; }
+        .historia { padding: 100px 50px; max-width: 1200px; margin: 0 auto; }
+        .timeline { display: flex; flex-direction: column; gap: 40px; border-left: 3px solid var(--accent-color); padding-left: 30px; margin-left: 20px; }
+        .timeline-item { position: relative; background: var(--card-bg); padding: 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s; }
+        .timeline-item:hover { transform: translateX(10px); }
+        .timeline-item::before { content: ''; position: absolute; left: -38px; top: 30px; width: 15px; height: 15px; background: var(--bg-color); border: 3px solid var(--accent-color); border-radius: 50%; }
+        .timeline-item h3 { color: var(--accent-color); margin-bottom: 10px; font-size: 1.5rem; }
 
-        .hero span {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+        .galeria { padding: 100px 50px; background-color: #111113; }
+        .grid-fotos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .polaroid { background: #fff; padding: 15px 15px 40px 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transform: rotate(-2deg); transition: transform 0.3s, z-index 0.3s; position: relative; }
+        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
+        .polaroid img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(30%); transition: filter 0.3s; }
+        .polaroid:hover img { filter: grayscale(0%); }
+        .polaroid p { color: #333; text-align: center; margin-top: 15px; font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 0.9rem; }
+        
+        .foto-vazia { width: 100%; height: 250px; background-color: #e0e0e0; border: 2px dashed #999; display: flex; justify-content: center; align-items: center; color: #999; font-size: 3rem; font-weight: bold; }
 
-        /* História */
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .historia {
-            padding: 100px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 30px;
-            margin-left: 20px;
-        }
-
-        .timeline-item {
-            position: relative;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -38px;
-            top: 30px;
-            width: 15px;
-            height: 15px;
-            background: var(--bg-color);
-            border: 3px solid var(--accent-color);
-            border-radius: 50%;
-        }
-
-        .timeline-item h3 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        /* Galeria */
-        .galeria {
-            padding: 100px 50px;
-            background-color: #111113;
-        }
-
-        .grid-fotos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .polaroid {
-            background: #fff;
-            padding: 15px 15px 40px 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transform: rotate(-2deg);
-            transition: transform 0.3s, z-index 0.3s;
-            position: relative;
-        }
-
-        .polaroid:nth-child(even) {
-            transform: rotate(2deg);
-        }
-
-        .polaroid:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 10;
-        }
-
-        /* Estilo da foto real */
-        .polaroid img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            filter: grayscale(30%);
-            transition: filter 0.3s;
-        }
-
-        .polaroid:hover img {
-            filter: grayscale(0%);
-        }
-
-        .polaroid p {
-            color: #333;
-            text-align: center;
-            margin-top: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        /* Estilo para os espaços em branco (Placeholders) */
-        .foto-vazia {
-            width: 100%;
-            height: 250px;
-            background-color: #e0e0e0;
-            border: 2px dashed #999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: #0a0a0b;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        footer p {
-            color: #a0a0a0;
-        }
+        footer { text-align: center; padding: 40px; background: #0a0a0b; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer p { color: #a0a0a0; }
 
         @media (max-width: 768px) {
-            nav ul { display: none; }
             .hero h2 { font-size: 2.5rem; }
             .historia, .galeria { padding: 50px 20px; }
             nav { padding: 20px; }
@@ -251,10 +171,23 @@
 
     <nav aria-label="Navegação principal">
         <h1>terceirao 302 <span>homago</span></h1>
-        <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#historia">A Jornada</a></li>
-            <li><a href="#galeria">Memórias</a></li>
+        
+        <div class="menu-toggle" id="btn-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-menu" id="menu-lateral">
+            <li><a href="#inicio">🏠 Início</a></li>
+            <li><a href="#historia">📖 A Jornada</a></li>
+            <li><a href="#galeria">📸 Memórias</a></li>
+            
+            <div class="menu-divisor"></div>
+            
+            <li><a href="#" class="categoria-futura">⏳ Cápsula do Tempo (Em breve)</a></li>
+            <li><a href="#" class="categoria-futura">👥 Os Sobreviventes (Em breve)</a></li>
+            <li><a href="#" class="categoria-futura">🤫 Arquivo Confidencial (Em breve)</a></li>
         </ul>
     </nav>
 
@@ -311,6 +244,25 @@
     <footer>
         <p>Feito com ❤️ pela turma. Que venha o futuro.</p>
     </footer>
+
+    <script>
+        // Pegamos o botão e o menu pelo ID
+        const btnMenu = document.getElementById('btn-menu');
+        const menuLateral = document.getElementById('menu-lateral');
+
+        // Quando clicar no botão, adicionamos ou removemos a classe 'active'
+        btnMenu.addEventListener('click', () => {
+            menuLateral.classList.toggle('active');
+        });
+
+        // Opcional: Fechar o menu se clicar em um dos links (útil para celular)
+        const linksMenu = document.querySelectorAll('.nav-menu a:not(.categoria-futura)');
+        linksMenu.forEach(link => {
+            link.addEventListener('click', () => {
+                menuLateral.classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
